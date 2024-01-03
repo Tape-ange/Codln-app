@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 divImg">
+      
+        <img src="../../../assets/image/login.jpeg"  class="img-fluid w-100 h-100"  />
+   
+    </div>
+    <div class="col-md-4 p-4 ">
+      <div class="container p-4 ">
+        <div class="col-md-12 d-flex justify-content-center">
+          <img src="../../../assets/image/logo.jpeg"  alt="" />
+        </div>
+        <div class="col-md-12 text-center">
+          <p class="text-color">Spéculation</p>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12  mb-3 d-flex justify-content-center">
+              <app-badge></app-badge>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <p class="text-color">Connexion</p>
+        </div>
+        <form action="" [formGroup]="loginForm">
+            <div class="col-md-12 ">
+                <label for="">Email ou Téléphone</label> 
+                <div  class="col-md-12">
+                  <input class="w-100 input-group-text" type="text" formControlName="email" />
+                </div>          
+              </div>
+              <div class="col-md-12 ">
+                <label for="">Mot de Passe</label> 
+                <div class="col-md-12  ">
+                  <input class="w-100 input-group-text" type="password" name="" id="" formControlName="password" />
+                </div>
+              </div>
+              <div class="col-md-12 text-center mt-4">
+                <button type="submit" class="btn btn-primary"  (click)="login()">Connexion</button>
+              </div>
+              <div class="col-md-12 mt-4">
+                <!-- <p>Vous n'avez pas de compte ? <a href="" routerLink="/singup">Inscrivez vous</a></p> -->
+                <p class="text-color">Rénitiliser mon mot de passe</p>
+              </div>
+        </form>
+ 
+      </div>
+    </div>
+  </div>
+</div>

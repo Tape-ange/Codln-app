@@ -1,0 +1,37 @@
+{
+    "user": [
+        {
+            "mail": "ange@gmail.com",
+            "password": "123456"
+        }
+    ],
+    "entrepot": [
+        {
+            "id": 1,
+            "libelle" : "acipac yop",
+            "superficie": "3200",
+             "placer": "yopougon",
+             "latitude": "45",
+            "longitude": "50"
+
+        },
+        {
+            "id": 2,
+            "libelle" : "acipac yop",
+            "superficie": "3200",
+             "placer": "yopougon",
+             "latitude": "45",
+            "longitude": "50"
+            
+        },
+        {
+            "id": 3,
+            "libelle" : "acipac yop",
+            "superficie": "3200",
+             "placer": "yopougon",
+             "latitude": "45",
+            "longitude": "50"
+            
+        }
+    ]
+}

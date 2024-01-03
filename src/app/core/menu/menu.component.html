@@ -1,0 +1,55 @@
+<div class="container-fluid bg-body-tertiary">
+  <!-- header -->
+  <section>
+    <div class=" ">
+      <nav class="navbar ">
+        <div class="container-fluid mb-4 row">
+          <div class="col-md-8 d-flex">
+           <app-badge></app-badge>
+           
+           
+          </div>
+          <div class="col-md-4 d-flex justify-content-between">
+            <div>
+              <button type="button" class="btn d-flex badge1">
+                  <mat-icon>notifications </mat-icon> 4
+              </button>
+            </div>
+            <div class="dropdown">
+              <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Francais
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">francais</a></li>
+                <li><a class="dropdown-item" href="#">anglais</a></li>
+                
+              </ul>
+            </div>
+            <div><div class="dropdown">
+              <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cap Skin
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div></div>
+          </div>
+        </div>
+       
+      </nav>
+    </div>
+    
+  </section>
+  <!-- header fin -->
+
+  <!-- corps -->
+  <section>
+    <div>
+        <ng-content> </ng-content>
+    </div>
+   
+  </section>
+  <!-- corps fin -->
+</div>
