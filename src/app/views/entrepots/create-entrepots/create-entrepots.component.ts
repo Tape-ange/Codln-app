@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-entrepots',
@@ -18,7 +20,8 @@ export class CreateEntrepotsComponent {
     placer: new FormControl(''),
   })
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore,
+    private route: Router) {}
 
   creerEntrepot() {
     
@@ -32,6 +35,15 @@ export class CreateEntrepotsComponent {
     })
     .then((docRef) => {
       console.log('Document ajouté avec ID : ', docRef.id);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Entrepot créer avec succes",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.route.navigateByUrl('/entrepots')
+
     })
     .catch((error) => {
       console.error('Erreur lors de l\'ajout du document : ', error);

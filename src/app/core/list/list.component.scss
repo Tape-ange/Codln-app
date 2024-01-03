@@ -8,9 +8,14 @@ a.active{
 a{
     text-decoration: none !important;
 }
-li:hover{
-    background-color: orange;
-}
+
+   
+    li:hover{
+        border: 1px solid !important;
+        background-color: orange !important;
+        border-radius: 4% !important;
+    }
+
 .list-group-item{
     border: none !important;
     background-color:#9f9d9954 !important;

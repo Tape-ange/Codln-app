@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, map } from 'rxjs';
+import { ModalComponent } from 'src/app/core/modal/modal.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-entrepots',
@@ -64,14 +67,15 @@ export class ListEntrepotsComponent {
     placer: new FormControl(''),
   })
 
-  dataSource = [];
-  displayedColumns: any;
+  dataSource : any;
+  displayedColumns: string[] = ['libelle', 'superficie', 'placer', 'action'];
   donneesFirebase: Observable<unknown[]> | undefined;
 
   //donneesFirebase: Observable<any[]>;
 
-  constructor(private firestore: AngularFirestore) {
-    // Remplacez 'collectionName' par le nom de votre collection dans Firestore 
+  constructor(private firestore: AngularFirestore,
+    public dialog: MatDialog) {
+    
   }
   ngOnInit() : void{
     this.getLIstEntrepot();
@@ -79,18 +83,7 @@ export class ListEntrepotsComponent {
     
   }
 
-  // getLIstEntrepot(): Observable{
-  //   this.donneesFirebase = this.firestore.collection('entrepot').snapshotChanges();
-  //   this.donneesFirebase.pipe(
-  //     map(actions => {
-  //       return actions.map(a => {
-  //         const data = a.payload.doc.data() as any;
-  //         const id = a.payload.doc.id;
-  //         return { id, ...data };
-  //       });
-  //     })
-  //   );
-  // }
+
 
   getLIstEntrepot(): void {
     this.firestore.collection('entrepot').snapshotChanges()
@@ -103,21 +96,71 @@ export class ListEntrepotsComponent {
           });
         })
       ).subscribe(res =>{
+        this.dataSource = res
         console.log("get",res);
         
       });
   }
 
-  supprimerDonnee() {
-    // Remplacez 'collectionName' par le nom de votre collection dans Firestore
-    // et 'documentId' par l'ID du document que vous souhaitez supprimer.
-    this.firestore.collection('entrepot').doc('id').delete()
+  deleteEntrepot(data : any) {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-secondary ",
+        cancelButton: "btn btn-primary "
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Etes vous Sure",
+      text: "Suprimer l'entrepot",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Oui",
+      cancelButtonText: "Non!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire({
+          title: "Deleted!",
+          text: "Entrepot suprimé",
+          icon: "success"
+        });
+       const id = {id: data} 
+       console.log('Document supprimé avec succès 1.', id);
+         this.firestore.collection('entrepot').doc('id').delete()
       .then(() => {
-        console.log('Document supprimé avec succès.');
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la suppression du document : ', error);
-      });
+        console.log('Document supprimé avec succès.', id);
+        swalWithBootstrapButtons.fire(
+          'Suprimé',
+          "L'entrepot a bien été suprimé",
+          'success'
+        );
+        this.getLIstEntrepot();
+     })
+     .catch((error) => {
+       console.error('Erreur lors de la suppression du document : ', error);
+     });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelled",
+          text: "Your imaginary file is safe :)",
+          icon: "error"
+        });
+      }
+    });
+    
+    
+    // this.firestore.collection('entrepot').doc('id').delete()
+    //   .then(() => {
+    //     console.log('Document supprimé avec succès.', id);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Erreur lors de la suppression du document : ', error);
+    //   });
   }
   modifierDonnee() {
     // Remplacez 'collectionName' par le nom de votre collection dans Firestore

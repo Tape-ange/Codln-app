@@ -9,6 +9,7 @@ import {
 } from '@angular/fire/auth';
 import { RegisterService } from '../service/register.service';
 import { getAuth } from "firebase/auth";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent {
     password: new FormControl(''),
   });
 
-  constructor(private serviceRegister: RegisterService) {}
+  constructor(private serviceRegister: RegisterService,
+    private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -36,7 +38,7 @@ export class LoginComponent {
       .signIn( this.loginForm.value.email, this.loginForm.value.password)
       .then(() => {
        
-
+this.router.navigateByUrl('/entrepots')
         // ...
       })
       .catch((error) => {
